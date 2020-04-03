@@ -3,9 +3,12 @@
 
 int outputType = 0;
 inputFile *file;
+stringbuilder *sb;
 
 int main(int argc, char** argv) {
 	file = (inputFile*)malloc(sizeof(inputFile));
+	sb = (stringbuilder*)malloc(sizeof(stringbuilder));
+	sb_init(sb);
 
 	if(argc <= 1) {
 		printf("Usage: %s [-x] filename\n", argv[0]);
@@ -46,6 +49,7 @@ int main(int argc, char** argv) {
 
 	fclose(file->fp);
 	free(file);
+	free(sb);
 
 	return 0;
 }
