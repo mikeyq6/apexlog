@@ -4,13 +4,15 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
+#include <stdlib.h>
 
 enum _outputType {
 	XML = 1
 };
 
 typedef struct _inputFile {
-	const char* filename;
+	const char *filename;
+	FILE *fp;
 } inputFile;
 
 void init();
