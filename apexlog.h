@@ -17,6 +17,12 @@ typedef struct _inputFile {
 	FILE *fp;
 } inputFile;
 
+int outputType = 0;
+inputFile *file;
+stringbuilder *sb;
+char *outputFilename;
+FILE *ofp;
+
 void init();
 void convertToXML();
 

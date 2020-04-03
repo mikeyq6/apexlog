@@ -14,7 +14,8 @@ void sb_append(stringbuilder *sb, const char* str) {
 	int len = strlen(str);
 
 	if(sb->string == NULL) {
-		//printf("str: %s\n", str);
+		printf("str: %s\n", str);
+		printf("Buffer size: %i\n", sb->bufferSize);
 		while(len > sb->bufferSize) {
 			// Increase buffer size
 			sb->bufferSize += BUFFER_INCREMENT;

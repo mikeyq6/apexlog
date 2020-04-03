@@ -1,16 +1,7 @@
 #include "apexlog.h"
 
-
-int outputType = 0;
-inputFile *file;
-stringbuilder *sb;
-char *outputFilename;
-
 int main(int argc, char** argv) {
-	file = (inputFile*)malloc(sizeof(inputFile));
-	sb = (stringbuilder*)malloc(sizeof(stringbuilder));
-	outputFilename = NULL;
-	sb_init(sb);
+	init();
 
 	if(argc <= 1) {
 		printf("Usage: %s [-x] filename\n", argv[0]);
@@ -18,9 +9,10 @@ int main(int argc, char** argv) {
 	}
 
 	for(int i=1; i<argc; i++) {
-		if(strncmp(argv[i], "-x", (int)sizeof(argv[i]))) {
+		if(strncmp(argv[i], "-x", strlen(argv[i])) == 0) {
+			printf("Match!\n");
 			outputType = XML;
-		} else if(strncmp(argv[i], "-o", (int)sizeof(argv[i]))) {
+		} else if(strncmp(argv[i], "-o", (int)sizeof(argv[i])) == 0) {
 			outputFilename = argv[++i];
 		}
 
@@ -47,6 +39,12 @@ int main(int argc, char** argv) {
 		}
 	}
 
+	ofp = fopen(outputFilename, "w");
+	if(ofp == NULL) {
+		printf("Couldn't open file \"%s\" for writing.\n", outputFilename);
+		return 4;
+	}
+
 	switch(outputType) {
 		case XML:
 			convertToXML();
@@ -55,7 +53,11 @@ int main(int argc, char** argv) {
 			break;
 	}
 
+	//printf("Outputting: \"%s\", size: %i, to file: \"%s\"\n", sb->string, sb->size, outputFilename);
+	fwrite(sb->string, sizeof(char), sb->size, ofp);
+
 	fclose(file->fp);
+	fclose(ofp);
 	free(file);
 	free(sb);
 
@@ -63,11 +65,16 @@ int main(int argc, char** argv) {
 }
 
 void init() {
+	file = (inputFile*)malloc(sizeof(inputFile));
 	file->filename = NULL;
 	file->fp = NULL;
+	sb = (stringbuilder*)malloc(sizeof(stringbuilder));
+	outputFilename = NULL;
+	outputType = 0;
+	sb_init(sb);
 }
 
 void convertToXML() {
-	sb_append(sb, "<?xml version=\"1.0\"?>\n");
+	sb_append(sb, "<?xml version=\"1.0\"?>\n\0");
 
 }
