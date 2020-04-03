@@ -55,6 +55,8 @@ void sb_append(stringbuilder *sb, const char* str) {
 
 #ifdef DEBUG
 void runTests() {
+	printf("Running stringbuilder tests...");
+
 	// Arrange
 	stringbuilder *sb = (stringbuilder*)malloc(sizeof(stringbuilder));
 	sb->string = NULL;
@@ -94,5 +96,7 @@ void runTests() {
 	assert(strcmp(sb->string, buffer) == 0);
 
 	free(sb);
+
+	printf("passed!\n");
 }
 #endif

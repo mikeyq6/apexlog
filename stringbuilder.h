@@ -6,7 +6,6 @@
 #include <stdlib.h>
 #include <assert.h>
 
-#define DEBUG 1
 #define BUFFER_INCREMENT 10
 
 typedef struct _stringbuilder {
