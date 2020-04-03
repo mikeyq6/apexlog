@@ -4,10 +4,12 @@
 int outputType = 0;
 inputFile *file;
 stringbuilder *sb;
+char *outputFilename;
 
 int main(int argc, char** argv) {
 	file = (inputFile*)malloc(sizeof(inputFile));
 	sb = (stringbuilder*)malloc(sizeof(stringbuilder));
+	outputFilename = NULL;
 	sb_init(sb);
 
 	if(argc <= 1) {
@@ -18,12 +20,18 @@ int main(int argc, char** argv) {
 	for(int i=1; i<argc; i++) {
 		if(strncmp(argv[i], "-x", (int)sizeof(argv[i]))) {
 			outputType = XML;
+		} else if(strncmp(argv[i], "-o", (int)sizeof(argv[i]))) {
+			outputFilename = argv[++i];
 		}
 
 		if(i == argc-1) {
 			// last argument is input file
 			file->filename = argv[i];
 		}
+	}
+
+	if(outputFilename == NULL) {
+		outputFilename = "output";
 	}
 
 	if(file->filename == NULL) {
@@ -60,5 +68,6 @@ void init() {
 }
 
 void convertToXML() {
+	sb_append(sb, "<?xml version=\"1.0\"?>\n");
 
 }

@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <assert.h>
 
-#define BUFFER_INCREMENT 10
+#define BUFFER_INCREMENT 1000
 
 typedef struct _stringbuilder {
 	char* string;
