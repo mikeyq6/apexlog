@@ -14,5 +14,6 @@ typedef struct _inputFile {
 } inputFile;
 
 void init();
+void convertToXML();
 
 #endif /* APEXLOG_H */

@@ -23,16 +23,26 @@ int main(int argc, char** argv) {
 	}
 
 	if(file.filename == NULL) {
-		printf("No filename supplied\n";)
+		printf("No filename supplied\n");
 		printf("Usage: %s [-x] filename\n", argv[0]);
 		return 2;
 	}
 
-	
+	switch(outputType) {
+		case XML:
+			convertToXML();
+			break;
+		default:
+			break;
+	}
 
 	return 0;
 }
 
 void init() {
 	file.filename = NULL;
+}
+
+void convertToXML() {
+	
 }
